@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctypetype html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -102,23 +102,38 @@
       color: #006400;
     }
 
-    .popup-content p {
-      margin: 0.6rem 0;
-      font-size: 0.95rem;
+    .highlight-copy {
+      margin: 1rem 0 1.5rem;
+      text-align: center;
+      padding: 1rem;
+      background: linear-gradient(135deg, #e8f5e9, #f1f8e9);
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
     }
 
-    .copyable {
-      cursor: pointer;
-      padding: 0.3rem 0.6rem;
-      background: #f0f0f0;
-      border-radius: 6px;
+    .copy-label {
+      margin: 0.3rem 0;
+      font-size: 1rem;
+      font-weight: 600;
+      color: #004d40;
+    }
+
+    .big-copy {
       display: inline-block;
-      margin-top: 0.3rem;
-      transition: background 0.2s;
+      font-size: 1.4rem;
+      font-weight: bold;
+      padding: 0.4rem 1rem;
+      margin: 0.3rem 0 0.8rem;
+      background: white;
+      border: 2px solid #4caf50;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.2s ease;
     }
 
-    .copyable:hover {
+    .big-copy:hover {
       background: #d9fdd3;
+      transform: scale(1.05);
     }
 
     .close-btn {
@@ -160,7 +175,7 @@
       <button class="btn" onclick="openPopup('14 Days - 22GB', '115')">Buy</button>
     </div>
 
-    <!-- New Bundles -->
+    
     <div class="bundle">
       <h3>21 Days - 35GB</h3>
       <p>High-speed internet<br>Works on all networks</p>
@@ -187,13 +202,20 @@
   <div class="popup" id="popup" onclick="closeOutside(event)">
     <div class="popup-content">
       <h2>M-Pesa Payment Instructions</h2>
+
+      <div class="highlight-copy">
+        <p class="copy-label">Till Number:</p>
+        <span class="copyable big-copy" onclick="copyText('8471601')">8471601</span>
+      </div>
+
       <p id="selected-plan"></p>
+      <hr>
       <p><strong>Steps to Complete Your Payment:</strong></p>
       <p>1. Go to M-Pesa on your phone</p>
       <p>2. Select <b>Lipa na M-Pesa</b></p>
       <p>3. Select <b>Buy Goods and Services</b></p>
-      <p>4. Enter Till Number: <span class="copyable" onclick="copyText('123456')">123456(Tap to copy)</span></p>
-      <p>5. Enter Amount: <span class="copyable" id="amount" onclick="copyText(this.innerText)">Ksh 0</span></p>
+      <p>4. Enter the Till Number above</p>
+      <p>5. Enter the Amount: <span id="amount">Ksh 0</span></p>
       <p>6. Enter your M-Pesa PIN</p>
       <p>7. Confirm and send payment</p>
       <p>Your package will be activated automatically after confirmation.</p>
