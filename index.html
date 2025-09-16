@@ -126,17 +126,21 @@
       padding:18px;
     }
     .popup.show{ display:flex; }
-    
-     .modal{
+
+    .modal{
       background:var(--white);
       border-radius:12px;
       padding:18px;
       max-width:500px;
-      width:95%;   /* now almost full width */
-      height:95vh; /* now fills most of screen height */
+      width:95%;   
+      height:95vh; 
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between; /* keep content and button apart */
       overflow-y:auto;
       animation:pop .25s ease;
-    }{ from{opacity:0;transform:scale(.9)} to{opacity:1;transform:scale(1)} }
+    }
+    @keyframes pop { from{opacity:0;transform:scale(.9)} to{opacity:1;transform:scale(1)} }
 
     .modal h3{ margin:0 0 10px; color:var(--g-dark) }
     .till-box{
@@ -177,7 +181,7 @@
   <div class="wrap">
     <div class="lead-card">
       <h1>STARNET KENYA</h1>
-      <p>Affordable Internet Packages<br>(Available on all networks)</p>
+      <p>Reliable & Affordable Internet Bundles for Every Network</p>
     </div>
 
     <div class="bundle b1" onclick="openPopup('1 Day - 5GB','55')">
@@ -223,16 +227,18 @@
   <!-- Popup -->
   <div id="popup" class="popup" onclick="if(event.target===this)closePopup()">
     <div class="modal">
-      <h3>M-Pesa Payment</h3>
-      <div class="till-box">
-        <div>Till Number <div class="till-num" id="tillNum">6410336</div></div>
-        <button class="till-copy" onclick="copyTill()">Copy</button>
+      <div>
+        <h3>M-Pesa Payment</h3>
+        <div class="till-box">
+          <div>Till Number <div class="till-num" id="tillNum">6410336</div></div>
+          <button class="till-copy" onclick="copyTill()">Copy</button>
+        </div>
+        <p id="chosenPlan"></p>
+        <ol class="steps">
+          <li>Go to M-Pesa</li><li>Select Lipa na M-Pesa</li><li>Buy Goods and Services</li>
+          <li>Enter Till Number: 6410336</li><li>Enter Amount</li><li>Confirm Payment</li>
+        </ol>
       </div>
-      <p id="chosenPlan"></p>
-      <ol class="steps">
-        <li>Go to M-Pesa</li><li>Select Lipa na M-Pesa</li><li>Buy Goods and Services</li>
-        <li>Enter Till Number: 6410336</li><li>Enter Amount</li><li>Confirm Payment</li>
-      </ol>
       <button class="close" onclick="closePopup()">Done</button>
     </div>
   </div>
